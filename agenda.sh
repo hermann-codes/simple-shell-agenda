@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-my_db_file=db.txt
+my_db_file=db.csv
 
 add()
 {
@@ -18,7 +18,7 @@ add()
   do 
     read -p "Hour (HH:MM) --> " _hour
   done
-  echo "$_title\t$_date\t$_hour" >> "$my_db_file"
+  echo "$_title;$_date;$_hour" >> "$my_db_file"
   unset _title
   unset _date
   unset _hour
@@ -47,7 +47,7 @@ consult()
 {
   if [ -f "$my_db_file" ];then
     i=1
-    while IFS= read -r title date hour
+    while IFS=";" read -r title date hour
     do
         echo -e "$i\t$title\t$date\t$hour"
         i=$(($i+1))
